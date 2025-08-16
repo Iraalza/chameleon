@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbb7dd842y1nk"]
+
+[ext_resource type="Script" uid="uid://c0pdfdvond756" path="res://Chameleon/chameleon.gd" id="1_wky2t"]
+[ext_resource type="Material" uid="uid://cq06aob2bg0wp" path="res://Materials/Black.tres" id="2_rj8cl"]
+[ext_resource type="Material" uid="uid://ckl4j255q51sl" path="res://Materials/Blue.tres" id="3_6onhh"]
+[ext_resource type="Material" uid="uid://bo5vdhprg4pgt" path="res://Materials/Green.tres" id="4_clfc6"]
+[ext_resource type="Material" uid="uid://hjligrw3r5ye" path="res://Materials/Red.tres" id="5_fcp0t"]
+[ext_resource type="Material" uid="uid://bicactxqd7qpo" path="res://Materials/White.tres" id="6_x6y6p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afsnh"]
+albedo_color = Color(9.62615e-08, 0.601232, 0.311742, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ldo14"]
+material = SubResource("StandardMaterial3D_afsnh")
+
+[sub_resource type="BoxMesh" id="BoxMesh_4dha1"]
+material = SubResource("StandardMaterial3D_afsnh")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_paplp"]
+material = SubResource("StandardMaterial3D_afsnh")
+size = Vector3(0.25, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ixay7"]
+size = Vector3(1, 1, 2.3)
+
+[node name="Chameleon" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_wky2t")
+materials = Array[StandardMaterial3D]([ExtResource("2_rj8cl"), ExtResource("3_6onhh"), ExtResource("4_clfc6"), ExtResource("5_fcp0t"), ExtResource("6_x6y6p")])
+
+[node name="Chameleon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_ldo14")
+skeleton = NodePath("../..")
+
+[node name="Chameleon2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.7)
+mesh = SubResource("BoxMesh_4dha1")
+skeleton = NodePath("../..")
+
+[node name="Chameleon3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.97144)
+mesh = SubResource("BoxMesh_paplp")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.25)
+shape = SubResource("BoxShape3D_ixay7")
+
+[node name="RaySelectMaterial" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
+collision_mask = 2
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, -0.0287939, 0.999585, 0, -0.999585, -0.0287939, 0, 14.6206, 0)

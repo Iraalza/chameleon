@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://wah370kjb2eh"]
+
+[ext_resource type="Script" uid="uid://bhpq4p4tit3xa" path="res://Enemy/enemy.gd" id="1_2pb1h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjnqo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2pb1h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_px1sc"]
+albedo_color = Color(0.255903, 0.430431, 0.452611, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_am0pq"]
+radius = 0.39
+height = 1.01
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_2pb1h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xjnqo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2pb1h")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.39205, -0.337506)
+material_override = SubResource("StandardMaterial3D_px1sc")
+mesh = SubResource("CapsuleMesh_am0pq")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -20)
