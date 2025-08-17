@@ -188,4 +188,5 @@ script = ExtResource("10_atqpo")
 transform = Transform3D(0.999794, -6.69826e-11, 0.0204217, -7.69531e-07, 1, 3.76746e-05, -0.0204217, -3.76824e-05, 0.999796, -0.0747132, -0.126672, -0.227385)
 
 [connection signal="find_chameleon" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_find_chameleon"]
+[connection signal="find_wall" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_find_wall"]
 [connection signal="lost_chameleon" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_lost_chameleon"]

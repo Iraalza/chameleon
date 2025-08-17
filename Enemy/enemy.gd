@@ -12,11 +12,15 @@ var return_target = Vector3.ZERO
 
 signal find_chameleon(body)
 signal lost_chameleon
+signal find_wall(body)
 	
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		is_find_chameleon = true
 		find_chameleon.emit(body)
+	
+	if body is StaticBody3D:
+		find_wall.emit(body)
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body is CharacterBody3D:
