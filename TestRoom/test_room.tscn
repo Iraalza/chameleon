@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=4 uid="uid://c5ce6304qt8ou"]
+[gd_scene load_steps=26 format=4 uid="uid://c5ce6304qt8ou"]
 
+[ext_resource type="Script" uid="uid://dgjf5mnexelia" path="res://TestRoom/test_room.gd" id="1_26rjl"]
 [ext_resource type="Script" uid="uid://c8ae6xtpnv7je" path="res://TestRoom/ColorWall.gd" id="1_c6rac"]
 [ext_resource type="Material" uid="uid://cq06aob2bg0wp" path="res://Materials/Black.tres" id="1_paplp"]
 [ext_resource type="PackedScene" uid="uid://cbb7dd842y1nk" path="res://Chameleon/chameleon.tscn" id="2_ixay7"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://wah370kjb2eh" path="res://Enemy/enemy.tscn" id="9_v273y"]
 [ext_resource type="PackedScene" uid="uid://chsl5o1jmfu47" path="res://Wall/wall.tscn" id="10_7ysk5"]
 [ext_resource type="Script" uid="uid://br3nnfkyasfty" path="res://Enemy/path_follow_3d.gd" id="10_atqpo"]
+[ext_resource type="PackedScene" uid="uid://be5qxncrlovqm" path="res://MainMenu/game_menu.tscn" id="13_c0b1s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_paplp"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -66,6 +68,7 @@ _data = {
 point_count = 6
 
 [node name="TestRoom" type="Node3D"]
+script = ExtResource("1_26rjl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_awpmd")
@@ -187,6 +190,9 @@ script = ExtResource("10_atqpo")
 [node name="Enemy2" parent="Path3D/PathFollow3D" instance=ExtResource("9_v273y")]
 transform = Transform3D(0.999794, -6.69826e-11, 0.0204217, -7.69531e-07, 1, 3.76746e-05, -0.0204217, -3.76824e-05, 0.999796, -0.0747132, -0.126672, -0.227385)
 
+[node name="game_menu" parent="." instance=ExtResource("13_c0b1s")]
+
 [connection signal="find_chameleon" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_find_chameleon"]
 [connection signal="find_wall" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_find_wall"]
 [connection signal="lost_chameleon" from="Path3D/PathFollow3D/Enemy2" to="Path3D/PathFollow3D" method="_on_enemy_2_lost_chameleon"]
+[connection signal="hideMenu" from="game_menu" to="." method="_on_game_menu_hide_menu"]
