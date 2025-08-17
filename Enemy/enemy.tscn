@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://wah370kjb2eh"]
+[gd_scene load_steps=7 format=3 uid="uid://wah370kjb2eh"]
 
 [ext_resource type="Script" uid="uid://bhpq4p4tit3xa" path="res://Enemy/enemy.gd" id="1_2pb1h"]
 
@@ -12,6 +12,9 @@ albedo_color = Color(0.255903, 0.430431, 0.452611, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_am0pq"]
 radius = 0.39
 height = 1.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2pb1h"]
+size = Vector3(10.2337, 1.44672, 3.77269)
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 8
@@ -33,3 +36,14 @@ mesh = SubResource("CapsuleMesh_am0pq")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -20)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1.39559, 0, 0, 0, 3.31771, -0.0566223, 1.02097, -6.74681)
+shape = SubResource("BoxShape3D_2pb1h")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

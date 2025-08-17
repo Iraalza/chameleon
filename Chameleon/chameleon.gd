@@ -5,7 +5,7 @@ class_name Player extends CharacterBody3D
 
 # Переменные передвижения
 var can_move:bool=true
-var speed: float = 5.0
+var speed: float = 10.0
 var turn_speed: float = 2.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var m_sens = 0.002
@@ -40,7 +40,7 @@ func _physics_process(delta):
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * speed
 			move_and_slide()
-			$Pivot/Camera3D.global_position = $Pivot.global_position + Vector3(0, 15, 0)
+			$Pivot/Camera3D.global_position = $Pivot.global_position + Vector3(0, 30, 0)
 		rotate_toward_mouse()
 
 func input_interactive():

@@ -2,31 +2,22 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const DETECTION_ANGLE = 45.0
 
-func _physics_process(delta: float) -> void:
+var is_find_chameleon = false
+
+var path_follow_node: PathFollow3D
+var path_progress = 0.0
+var return_target = Vector3.ZERO
+
+signal find_chameleon(body)
+signal lost_chameleon
 	
-	move_rigt()
-	move_and_slide()
-	
-	var angle = global_position.angle_to(Global.player.global_position)
-	if rad_to_deg(angle) < 45:
-		print(rad_to_deg(angle))
-		$RayCast3D.look_at(Global.player.global_position)
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		is_find_chameleon = true
+		find_chameleon.emit(body)
 
-func check_visible_player():
-	var angle =  Global.player
-	pass
-
-func move_rigt():
-	velocity = Vector3.RIGHT * SPEED
-
-func move_left():
-	velocity = Vector3.LEFT * SPEED
-
-func move_down():
-	velocity = Vector3.DOWN * SPEED
-
-func move_up():
-	velocity = Vector3.UP * SPEED
-	
-	
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		lost_chameleon.emit()
